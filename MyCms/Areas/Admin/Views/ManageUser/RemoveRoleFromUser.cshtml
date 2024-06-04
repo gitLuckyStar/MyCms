@@ -1,0 +1,39 @@
+﻿@model RoleForUserViewModel
+
+@{
+    ViewData["Title"] = "RemoveRoleFromUser";
+}
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">کاربران</li>
+     <li class="breadcrumb-item active">حذف مقام</li>
+</ol>
+<hr />
+<form asp-controller="ManageUser" asp-action="RemoveRoleFromUser" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    @if (!Model.UserRoles.Any())
+    {        
+        <h5>هیچ مقامی یافت نشد</h5>
+        <a class="btn btn-outline-secondary" href="/Admin/ManageUser">بازگشت</a>
+    }
+    else
+    {
+        for (int i = 0; i < Model.UserRoles.Count; i++)
+        {
+            <div class="form-group">
+                <input asp-for="@Model.UserRoles[i].IsSelected" />
+                <label>@Model.UserRoles[i].RoleName</label>
+
+                <input type="hidden" asp-for="@Model.UserRoles[i].RoleName" />
+            </div>
+        }
+        <a class="btn btn-outline-secondary" href="/Admin/ManageUser">بازگشت</a>
+        <button class="btn btn-danger" type="submit">حذف</button>
+    }
+
+    <input type="hidden" asp-for="@Model.UserId" />
+    
+    
+</form>

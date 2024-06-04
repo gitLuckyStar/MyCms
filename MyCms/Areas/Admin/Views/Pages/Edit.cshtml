@@ -1,0 +1,87 @@
+﻿@model DataLayer.Page
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">خبرها</li>
+    <li class="breadcrumb-item active">ویرایش</li>
+</ol>
+<hr />
+
+<div class="row">
+    <div>
+        <form enctype="multipart/form-data" method="post" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PageID" />
+            <input type="hidden" asp-for="View" />
+            <input type="hidden" asp-for="ImageName" />
+            <input type="hidden" asp-for="Publisher" />
+            <input type="hidden" asp-for="PublisherID" />
+            <input type="hidden" asp-for="CreateDate" />
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label asp-for="GroupID" class="control-label"></label>
+                    <select class="form-control" asp-for="GroupID" asp-items="ViewBag.GroupID"></select>
+                    <span asp-validation-for="GroupID" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label asp-for="PageTitle" class="control-label"></label>
+                    <input asp-for="PageTitle" class="form-control" />
+                    <span asp-validation-for="PageTitle" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <textarea asp-for="ShortDescription" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <label class="col-form-label">انتخاب عکس</label>
+                    <input asp-for="ImageFile" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+                <div class="col-lg-6" style="margin-top:6px">
+                    <div class="form-group">
+                        <label asp-for="Tags" class="control-label"></label>
+                        <input asp-for="Tags" class="form-control" />
+                        <span asp-validation-for="Tags" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group align-content-center" style="text-align:center">
+                <img src="~/uploads/@Model.ImageName" class="img-thumbnail img-po-lg" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <textarea asp-for="Text" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ShowInSlider" /> @Html.DisplayNameFor(model => model.ShowInSlider)
+                </label>
+            </div>
+            <br />
+            <div class="form-group">
+                <a asp-action="Index" class=" btn btn-outline-secondary">بازگشت</a>
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            CKEDITOR.replace('Text');
+        });</script>
+}

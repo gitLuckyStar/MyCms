@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DataLayer.Page>
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<ol class="breadcrumb alert-secondary shadow-sm">
+    <li class="breadcrumb-item active">جدیدترین اخبار</li>
+</ol>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="row">
+                <div class="col-md-5">
+                    <div id="CarouselTest" class="carousel-inner carousel-item active">
+                        <img class="d-none d-lg-block card-height" src="~/uploads/@item.ImageName" alt="">
+                        <img class="d-block d-lg-none w-100" src="~/uploads/@item.ImageName" alt="">
+                    </div>
+                </div>
+                <div class="col-md-7 px-3">
+                    <div class="card-block px-6">
+                        <b class="card-title">@item.PageTitle</b>
+                        <p class="card-text">
+                            @item.ShortDescription
+                        </p>                        
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <a href="/News/ShowNews/@item.PageID" class="stretched-link"></a>
+        </div>
+    }
+}
+
+<br />
+

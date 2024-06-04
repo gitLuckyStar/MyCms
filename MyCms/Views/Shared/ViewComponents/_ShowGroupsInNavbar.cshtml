@@ -1,0 +1,16 @@
+﻿@model IEnumerable<DataLayer.Group>
+
+<li class="nav-item dropdown">
+    <a class="nav-link text-dark dropdown-toggle text-right" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">گروه های خبری</a>
+
+    <div class="dropdown-menu">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <a class="dropdown-item" href="/Group/@item.GroupID/@item.GroupName"> @item.GroupName</a>
+            }
+        }
+    </div>
+</li>
+

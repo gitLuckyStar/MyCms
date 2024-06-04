@@ -1,0 +1,24 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+@{
+    ViewData["Title"] = "AddRole";
+}
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">مقام ها</li>
+    <li class="breadcrumb-item active">افزودن مقام</li>
+</ol>
+<hr />
+<form asp-controller="ManageRole" asp-action="AddRole" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="control-lable">نام مقام :</label>
+        <select class="form-control" asp-for="Name">
+            <option>Manager</option>
+            <option>Publisher</option>
+        </select>
+    </div>
+    <a class="btn btn-outline-secondary" href="/Admin/ManageRole">بازگشت</a>
+    <button class="btn btn-success" type="submit">ثبت</button>
+</form>

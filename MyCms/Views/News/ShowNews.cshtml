@@ -1,0 +1,70 @@
+﻿@model DataLayer.Page
+@{
+    ViewData["Title"] = "ShowNews";
+}
+ <link rel="stylesheet" href="~/css/image.css" />
+<ol class="breadcrumb alert-secondary shadow-sm">
+    <li class="breadcrumb-item active"> نویسنده : @Model.Publisher</li>
+    <li class="breadcrumb-item active">انتشار : @Model.CreateDate.ToShamsi_Date() - @Model.CreateDate.ToShamsi_Time()</li>
+</ol>
+<h4>@Model.PageTitle</h4>
+<p>@Model.ShortDescription</p>
+<ol class="breadcrumb alert-secondary shadow-sm">
+    <li class="breadcrumb-item">
+        برچسب ها:
+        @if (Model.Tags != null)
+        {
+            foreach (var item in Model.Tags.Split('-'))
+            {
+                <a href="~/Search?q=@item"> @item</a>
+            }
+        }
+    </li>
+</ol>
+<img class="img-po-lg card-img" src="~/uploads/@Model.ImageName" />
+<div class="single-news">
+    <p>@Html.Raw(Model.Text)</p>
+</div>
+@if (_signInManager.IsSignedIn(User))
+{
+    <div class="card shadow-sm">
+        <ol class="breadcrumb alert-secondary shadow-sm">
+            <li class="breadcrumb-item active">ثبت دیدگاه</li>
+        </ol>
+        <div class="container">
+            <div class="form-group">
+                <label for="exampleTextarea">نظر خود را بنویسید</label>
+                <textarea class="form-control" id="txtComment" rows="3"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addComment()" class="btn btn-success">ثبت دیدگاه</button>
+    </div>
+}
+else
+{
+    <div class="alert alert-dismissible alert-danger">       
+        برای ثبت دیدگاه  <a href="/Account/Login" class="alert-link">ابتدا وارد سایت</a> شوید !
+    </div>
+}
+<h1></h1>
+
+
+<div id="CommentListComponents" class="card shadow-sm">
+    @await Component.InvokeAsync("CommentListComponents", new {id = Model.PageID})
+</div>
+
+<script>
+    function addComment() {
+        $.ajax({
+            url: "/News/AddComment/" + @Model.PageID,
+            type: "Get",
+            data: {  comment: $("#txtComment").val() }
+
+        }).done(function(result) {
+
+            $("#CommentListComponents").html(result);
+            $("#txtComment").val("");
+
+        });
+    }
+</script>

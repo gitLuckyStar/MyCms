@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <script src="https://www.google.com/recaptcha/api.js?hl=fa"></script>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>MyCms</title>
+    <link href="/css/Cmsstyles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/SiteStyle.css" />
+    <script src="~/lib/jquery/script.js"></script>
+</head>
+<body id="page-top" class="alert-primary">
+    <!-- Navigation-->
+    <nav class="navbar shadow-lg navbar-expand-lg navbar-light bg-light border-bottom box-shadow mb-3" id="mainNav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-text ps-3 d-block d-lg-none">BRAND LOGO</a>
+            </div>
+            <a class="navbar-brand" href="#page-top"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav flex-grow-1 mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">اخبار</a>
+                    </li>
+                    @await Component.InvokeAsync("ShowGroupsInNavbarComponents")
+                    <partial name="/Views/Shared/PartialViews/_AdminDashbord.cshtml" />
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout" method="post">
+                                خروج
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark">@User.Identity.Name</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">ثبت نام</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">ورود</a>
+                        </li>
+                    }
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div><button class="badge-pill btn btn-dark" type="submit" asp-controller="Search" asp-action="Index" method="get">بگرد</button></div>
+                    <div><input class="badge-pill  form-control mr-sm-2" type="text" name="q" placeholder="متن جستجو..."></div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Services-->
+    <div class="container margin-top-30">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 col-xs-12 ">
+                @RenderBody()
+                <br />
+            </div>
+        </div>
+        <br />
+    </div>
+    <!-- footer-->
+    <footer class="text-muted">
+        <div class="container">
+            <br />
+            &copy; 1402 - MyCmsWebApplication - Asp.Net Core Mvc
+            <hr />
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+@section Scripts {
+
+}

@@ -1,0 +1,49 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">مقام ها</li>
+</ol>
+<hr />
+<p>
+    <a class="btn btn-success" asp-action="AddRole">مقام جدید</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                مقام
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td>
+                    مقامی یافت نشد
+                </td>
+            </tr>
+        }
+        else
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model[i].Name
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-sm btn-outline-danger">حذف</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,34 @@
+﻿@model RoleForUserViewModel
+
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">کاربران</li>
+     <li class="breadcrumb-item active">افزودن مقام </li>
+</ol>
+<hr />
+
+@if (!Model.UserRoles.Any())
+{
+    <h5>هیچ مقامی یافت نشد</h5>
+}
+else
+{
+    <form asp-controller="ManageUser" asp-action="AddRoleForUser" method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+        @for (int i = 0; i < Model.UserRoles.Count; i++)
+        {
+        <div class="form-group">
+            <input asp-for="@Model.UserRoles[i].IsSelected" />
+            <label>@Model.UserRoles[i].RoleName</label>
+
+            <input type="hidden" asp-for="@Model.UserRoles[i].RoleName" />
+        </div>
+        }
+        <input type="hidden" asp-for="@Model.UserId" />
+        <a class="btn btn-outline-secondary" href="/Admin/ManageUser">بازگشت</a>
+        <button class="btn btn-success" type="submit">ثبت</button>
+    </form>
+}

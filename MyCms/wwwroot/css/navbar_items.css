@@ -1,0 +1,38 @@
+﻿.topnav-centered {
+    float: none;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%,-20%);
+}
+.topnav {
+    float: none;
+    top: 50%;
+    transform: translate(-15%,-20%);
+}
+.searchbar-position {
+    left: -20%;
+    transform: translate(15%,10%);
+}
+.Brandlogo-position {
+    left: -15%;
+    transform: translate(15%,10%);
+}
+.row-pos {
+    padding-right: 15px;
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-30 * var(--bs-gutter-x));
+}
+.dropdown-menu {
+    display: block;
+    opacity: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all .3s ease-in;
+}
+
+    .dropdown-menu.show {
+        max-height: 500px;
+        opacity: 1;
+        padding: 0.5rem 0;
+    }

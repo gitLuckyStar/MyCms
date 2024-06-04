@@ -1,0 +1,129 @@
+﻿
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/StylesAdmin.css" />
+    <link rel="stylesheet" href="~/css/navbar_items.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>    
+    <script src="/ckeditor/ckeditor.js"></script>
+    <title>MyCms</title>
+</head>
+<body>
+    <nav class="navbar navbar-toggleable-sm navbar-dark shadow-lg">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3 text-dark d-none d-lg-block">پنل مدیریت</a>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between container">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item dropdown d-block d-lg-none">                        
+                        <a class="nav-link dropdown-toggle text-dark text-right" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">@User.Identity.Name - پنل مدیریت</a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-items-right">
+                        @if (User.IsInRole("Owner") || User.IsInRole("Manager") || User.IsInRole("Publisher"))
+                        {
+                            @if (User.IsInRole("Owner") || User.IsInRole("Publisher"))
+                            {
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Pages" asp-action="Index">خبر ها</a>
+                            }
+                            @if (User.IsInRole("Owner"))
+                            {
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="PageGroups" asp-action="Index">گروه های خبری</a>
+                                <a class="dropdown-item " asp-area="Admin" asp-controller="ManageRole" asp-action="Index"> مقام ها</a>
+                            }
+                            @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+                            {
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="ManageUser" asp-action="Index"> کاربران</a>
+                            }
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav-nav">
+            <nav class="collapse d-lg-block sidebar sb-sidenav sb-sidenav-light alert-secondary shadow-lg sidebar-padding" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading ">@User.FindFirstValue(ClaimTypes.Role)</div>
+                        @if (User.IsInRole("Owner") || User.IsInRole("Manager") || User.IsInRole("Publisher"))
+                        {
+
+                            @if (User.IsInRole("Owner") || User.IsInRole("Publisher"))
+                            {
+                                <a class="nav-link" asp-area="Admin" asp-controller="Pages" asp-action="Index">
+                                    <div class="sb-nav-link-icon"></div>
+                                    خبر ها
+                                </a>
+                            }
+                            @if (User.IsInRole("Owner"))
+                            {
+                                <a class="nav-link" asp-area="Admin" asp-controller="PageGroups" asp-action="Index">
+                                    <div class="sb-nav-link-icon"></div>
+                                    گروه های خبری
+                                </a>
+                                <a class="nav-link" asp-area="Admin" asp-controller="ManageRole" asp-action="Index">
+                                    <div class="sb-nav-link-icon"></div>
+                                    مقام ها
+                                </a>
+                            }
+                            @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+                            {
+                                <a class="nav-link" asp-area="Admin" asp-controller="ManageUser" asp-action="Index">
+                                    <div class="sb-nav-link-icon"></div>
+                                    کاربران
+                                </a>
+                            }
+
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <div class="sb-nav-link-icon"></div>
+                                بازگشت به خانه
+                            </a>
+
+                        }
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">کاربر وارد شده:</div>
+                    @User.Identity.Name
+                </div>
+            </nav>
+        </div>
+        <div class="container ">
+            <main role="main" class="pb-3 align-content-end">
+                <div>
+                    <div>
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 mt-auto border-top">
+                <div class="container-fluid px-4">                   
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">&copy; 1402 - MyCmsWebApplication - Asp.Net Core Mvc</div>
+                        <div class="left-side">
+                        <h4><a href="">BRAND LOGO</a></h4>
+                        <H6> Place Holder</H6>
+                    </div>
+                    </div>
+                </div>
+                <br />
+            </footer>
+        </div>
+    </div>
+    <script src="/js/scripts.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script src="/ckeditor/ckeditor.js"></script>
+<script src="/ckeditor/adapters/jquery.js"></script>
+

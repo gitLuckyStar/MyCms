@@ -1,0 +1,21 @@
+﻿
+@model IEnumerable<DataLayer.Page>
+
+<br class="d-block d-lg-none" />
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm ">
+        پربازدید ترین ها
+    </li>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <li class="profile-card-2 shadow-lg">
+                <img src="~/uploads/@item.ImageName" class="img-po-xs img-responsive after">
+                <small class="profile-username">@item.PageTitle</small>
+                <div class="profile-name2 shadow-lg">@item.CreateDate.ToShamsi_Date() - @item.CreateDate.ToShamsi_Time()</div>
+                <div class="profile-icons"><a class="stretched-link" href="/News/ShowNews/@item.PageID"></a></div>
+            </li>
+        }
+    }
+</ul>

@@ -1,0 +1,23 @@
+﻿@if (User.IsInRole("Owner") || User.IsInRole("Manager") || User.IsInRole("Publisher"))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link text-dark dropdown-toggle  text-right" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">پنل مدیریت</a>
+        <div class="dropdown-menu">
+
+            @if (User.IsInRole("Owner") || User.IsInRole("Publisher"))
+            {
+                <a class="dropdown-item" asp-area="Admin" asp-controller="Pages" asp-action="Index">خبر ها</a>
+            }
+            @if (User.IsInRole("Owner"))
+            {
+                <a class="dropdown-item" asp-area="Admin" asp-controller="PageGroups" asp-action="Index">گروه های خبری</a>
+                <a class="dropdown-item " asp-area="Admin" asp-controller="ManageRole" asp-action="Index"> مقام ها</a>
+            }
+            @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+            {
+                <a class="dropdown-item" asp-area="Admin" asp-controller="ManageUser" asp-action="Index"> کاربران</a>
+            }
+
+        </div>
+    </li>
+}

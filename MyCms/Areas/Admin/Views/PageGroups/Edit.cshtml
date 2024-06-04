@@ -1,0 +1,35 @@
+﻿@model DataLayer.Group
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active">خانه / </li>
+  <li class="breadcrumb-item active">پنل مدیریت</li>
+  <li class="breadcrumb-item active">گروه های خبری</li>
+  <li class="breadcrumb-item active">ویرایش</li>
+</ol>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GroupID" />
+            <div class="form-group">
+                <label asp-for="GroupName" class="control-label"></label>
+                <input asp-for="GroupName" class="form-control" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-outline-secondary">بازگشت</a>
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

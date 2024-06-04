@@ -1,0 +1,42 @@
+﻿@model List<IndexViewModel>
+
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">کاربران</li>
+</ol>
+<hr />
+<div class="row col-12 text-center d-flex justify-content-center">
+    @if (!Model.Any())
+    {
+        <h1>کاربری یافت نشد</h1>
+    }
+    else
+    {
+        for (int i = 0; i < Model.Count; i++)
+        {
+
+            <div class="card border-light col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card-body">
+                    نام کاربر : <b>@Model[i].UserName</b>
+                    <hr />
+                    ایمیل : <b>@Model[i].Email</b>
+                    <hr />
+                    تایید ایمیل : <b>@Model[i].IsEmailConfirmed</b>
+                </div>
+                <div>                    
+                    <a asp-controller="ManageUser" asp-action="EditUser" asp-route-id="@Model[i].Id" class="btn btn-sm btn-outline-secondary">ویرایش</a>
+
+                    <a asp-controller="ManageUser" asp-action="AddRoleForUser" asp-route-id="@Model[i].Id" class="btn btn-sm btn-outline-secondary">افزودن مقام</a>
+
+                    <a asp-controller="ManageUser" asp-action="RemoveRoleFromUser" asp-route-id="@Model[i].Id" class="btn btn-sm btn-outline-danger">حذف مقام</a>
+
+                    <a asp-controller="ManageUser" asp-action="DeleteUser" asp-route-id="@Model[i].Id" class="btn btn-sm btn-outline-danger">حذف کاربر </a>
+                </div>
+            </div>
+
+        }
+
+    }
+</div>

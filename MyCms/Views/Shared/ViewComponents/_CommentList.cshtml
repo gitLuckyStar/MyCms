@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DataLayer.PageComment>
+
+<ol class="breadcrumb  justify-content-between alert-secondary shadow-sm">
+    <li class="breadcrumb-item active">دیدگاه دیگران</li>
+
+    @if (Model.Count() != 0)
+    {
+        <li> @Model.Count() دیدگاه ثبت شده</li>
+    }
+
+</ol>
+@if (Model.Count() != 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="card bg-light mb-3" style="width:95%;margin: 10px auto">
+            <div class="card-body">
+                <h4 class="card-title">@item.Name</h4>
+                <p class="card-text">@item.CommentText</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+     <div class="card bg-light mb-3" style="width:95%;margin: 10px auto">
+            <div class="card-body">
+                <p class="card-text">هنوز هیچ دیدگاهی ثبت نشده :(</p>
+            </div>
+        </div>
+}

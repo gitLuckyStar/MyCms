@@ -1,0 +1,23 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+@{
+    ViewData["Title"] = "EditUser";
+}
+
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">کاربران</li>
+     <li class="breadcrumb-item active">ویرایش کاربر</li>
+</ol>
+<hr />
+<form asp-controller="ManageUser" asp-action="EditUser" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="control-lable" asp-for="UserName">نام کاربر :</label>
+        <input class="form-control" asp-for="UserName" />
+    </div>
+    <input type="hidden" asp-for="Id" />
+    <a class="btn btn-outline-secondary" href="/Admin/ManageUser">بازگشت</a>
+    <button class="btn btn-success" type="submit">ثبت</button>
+</form>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DataLayer.Page>
+@{
+    ViewData["Title"] = "GroupNews";
+}
+
+<ol class="breadcrumb alert-secondary shadow-sm">
+  <li class="breadcrumb-item"><a href="/">خانه</a></li>
+  <li class="breadcrumb-item"><a href="/News">اخبار</a></li>
+  <li class="breadcrumb-item active">@ViewBag.Name</li>
+</ol>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="row ">
+                <div class="col-md-5">
+                    <div id="CarouselTest" class="carousel-inner carousel-item active">
+                        <img class="d-block" src="~/uploads/@item.ImageName" alt="" style="max-height:220px">
+                    </div>
+                </div>
+                <div class="col-md-7 px-3">
+                    <div class="card-block px-6">
+                        <h5 class="card-title">@item.PageTitle</h5>
+                        <p class="card-text">
+                            @item.ShortDescription
+                        </p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <a href="/News/ShowNews/@item.PageID" class="stretched-link"></a>
+        </div>
+    }
+}
+

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DataLayer.Group>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active">خانه / </li>
+  <li class="breadcrumb-item active">پنل مدیریت</li>
+  <li class="breadcrumb-item active">گروه های خبری</li>
+</ol>
+<hr />
+<p>
+    <a asp-action="Create" class="btn btn-success">افزودن گروه جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GroupID" class="btn btn-sm btn-outline-secondary">ویرایش</a> 
+                <a asp-action="Delete" asp-route-id="@item.GroupID" class="btn btn-sm btn-outline-danger">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

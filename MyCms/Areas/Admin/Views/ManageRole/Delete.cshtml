@@ -1,0 +1,22 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">مقام ها</li>
+    <li class="breadcrumb-item active">حذف مقام</li>
+</ol>
+<hr />
+<form asp-controller="ManageRole" asp-action="DeleteRole" asp-route-itemid="@Model.Id" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="control-lable">نام مقام : @Model.Name</label>
+
+    </div>
+    <a class="btn btn-outline-secondary" href="/Admin/ManageRole">بازگشت</a>
+    <button class="btn btn-danger" type="submit">حذف</button>
+</form>
+

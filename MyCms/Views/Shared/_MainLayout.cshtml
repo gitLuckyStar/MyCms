@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>MyCms</title>
+    <link href="/css/Cmsstyles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/SiteStyle.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="~/lib/jquery/script.js"></script>
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar shadow-lg navbar-expand-lg navbar-light bg-light border-bottom box-shadow mb-3" id="mainNav">
+        <div class="container">
+                <a class="navbar-text ps-3 d-block d-lg-none">BRAND LOGO</a>
+            <a class="navbar-brand" href="#page-top"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav flex-grow-1 mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">اخبار</a>
+                    </li>
+                    @await Component.InvokeAsync("ShowGroupsInNavbarComponents")
+                    <partial name="/Views/Shared/PartialViews/_AdminDashbord.cshtml" />
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout" method="post">
+                                خروج
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Manage" asp-action="ChangePassword">@User.Identity.Name</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">ثبت نام</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">ورود</a>
+                        </li>
+                    }
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div><button class="badge-pill btn btn-dark" type="submit" asp-controller="Search" asp-action="Index" method="get">بگرد</button></div>
+                    <div><input class="badge-pill  form-control mr-sm-2" type="text" name="q" placeholder="متن جستجو..."></div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Services-->
+    <div class="container margin-top-30">
+        <div class="row">
+            <aside class="d-lg-block d-none pull-right ">
+                @await Component.InvokeAsync("ShowGroupsComponents")
+                @if (_signInManager.IsSignedIn(User))
+                {
+                    if (User.IsInRole("Owner") || User.IsInRole("Manager") || User.IsInRole("Publisher"))
+                    {
+                        <ul class="list-group shadow-sm">
+                            <li class="list-group-item page-link d-flex justify-content-between align-items-center active ">
+                                <p class="card-subtitle">پنل مدیریت</p>
+                            </li>
+                            @if (User.IsInRole("Owner") || User.IsInRole("Publisher"))
+                            {
+                                <li class="list-group-item page-link d-flex justify-content-between align-items-center">
+                                    <h6 class="card-subtitle">مدیریت صفحات</h6>
+                                    <a class="stretched-link" href="/Admin/Pages"></a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Owner"))
+                            {
+                                <li class="list-group-item page-link d-flex justify-content-between align-items-center">
+                                    <h6 class="card-subtitle">مدیریت گروه ها</h6>
+                                    <a class="stretched-link" href="/Admin/Pagegroups"></a>
+                                </li>
+                                <li class="list-group-item page-link d-flex justify-content-between align-items-center">
+                                    <h6 class="card-subtitle">مدیریت مقام ها</h6>
+                                    <a class="stretched-link" href="/Admin/ManageRole"></a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+                            {
+                                <li class="list-group-item page-link d-flex justify-content-between align-items-center">
+                                    <h6 class="card-subtitle">مدیریت کاربران</h6>
+                                    <a class="stretched-link" href="/Admin/ManageUser"></a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+            </aside>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 ">
+                @RenderBody()
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
+                @await Component.InvokeAsync("TopNewsComponents")
+            </div>
+        </div>
+        <br />
+    </div>
+    <!-- footer-->
+    <footer class="text-muted">
+        <div class="container">
+            <div class="row alert-secondary shadow-lg">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <p>لیست دسترسی سریع</p>
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            <li><a href="#">خانه</a></li>
+                            <li><a href="#">درباره ما</a></li>
+                            <li><a href="#">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <p>شبکه های اجتماعی</p>
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            <li><a href="#">فیسبوک</a></li>
+                            <li><a href="#">یوتیوب</a></li>
+                            <li><a href="#">توییتر</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="left-side">
+                        <h4><a href="">BRAND LOGO</a></h4>
+                        <H6> Place Holder</H6>
+                    </div>
+                </div>
+            </div>
+            <br />
+            &copy; 1402 - MyCmsWebApplication - Asp.Net Core Mvc
+            <hr />
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+@section Scripts{
+
+}

@@ -1,0 +1,19 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+
+@{
+    ViewData["Title"] = "DeleteUser";
+}
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">خانه / </li>
+    <li class="breadcrumb-item active">پنل مدیریت</li>
+    <li class="breadcrumb-item active">کاربران</li>
+    <li class="breadcrumb-item active">حذف کاربر</li>
+</ol>
+<hr />
+<form asp-controller="ManageUser" asp-action="DeleteUser" method="post" >
+    <h6 class="mt-2">@Model.UserName</h6>
+    <p>آیا میخواهید این کاربر حذف شود؟</p>
+    <a class="btn btn-sm btn-outline-secondary" href="/Admin/ManageUser">بازگشت</a>
+    <button type="submit" class="btn btn-sm btn-outline-danger">حذف کاربر</button>
+</form>
